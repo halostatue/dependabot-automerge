@@ -1,0 +1,32 @@
+name: Quality Checks
+
+on:
+  pull_request:
+  pull_request_target:
+
+jobs:
+  dco-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: KineticCafe/actions-dco@v1.1
+        with:
+          exempt-authors: |
+            @kineticcommerce.com
+            @kineticcafe.com
+
+  dependabot-automerge:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./dependabot-automerge
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          update-type: minor
