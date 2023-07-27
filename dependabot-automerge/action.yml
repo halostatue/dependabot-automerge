@@ -20,7 +20,7 @@ inputs:
   repo-token:
     description: |
       The GitHub token for this action. Requires `pull-requests: write`
-        permission.
+      permission.
     required: true
     default: ${{ github.token }}
   update-type:
@@ -34,19 +34,24 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
+    - if: >
+        (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
+        && github.actor == 'dependabot[bot]'
       run: echo "UPDATE_TYPE=version-update:semver-${{inputs.update-type}}" >> "${GITHUB_ENV}"
       shell: bash
 
-    - if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
+    - if: >
+        (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
+        && github.actor == 'dependabot[bot]'
       id: metadata
       uses: dependabot/fetch-metadata@v1
       with:
         github-token: ${{ inputs.repo-token }}
 
     - if: >
-        github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' &&
-        steps.metadata.outputs.update-type == env.UPDATE_TYPE
+        (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
+        && github.actor == 'dependabot[bot]'
+        && steps.metadata.outputs.update-type == env.UPDATE_TYPE
       run: gh pr merge --auto --merge "$PR_URL"
       shell: bash
       env:

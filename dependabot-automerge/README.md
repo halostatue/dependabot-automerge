@@ -36,7 +36,7 @@ jobs:
 name: Dependabot Automerge
 
 on:
-  pull_request_target:
+  pull_request:
 
 jobs:
   dependabot-automerge:
