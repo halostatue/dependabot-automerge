@@ -27,5 +27,5 @@ jobs:
 
       - uses: ./dependabot-automerge
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           update-type: minor

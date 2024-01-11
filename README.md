@@ -10,6 +10,9 @@ across all workflow versions.
 - [dependabot-automerge](tree/main/dependabot-automerge): A simple composite
   action to simplify the enabling of auto-merge of Dependabot PRs.
 
+- [resolve-ref](tree/main/resolve-ref): A simple composite action to resolve an
+  input reference to a Git SHA in the running repository.
+
 ## Contributing
 
 We value contributions to KineticCafe/actions—bug reports, discussions, feature
