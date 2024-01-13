@@ -45,7 +45,7 @@ jobs:
           exit 1
       - if: github.event_name == 'workflow_dispatch'
         id: resolve
-        uses: KineticCafe/actions/resolve-ref@v1.0
+        uses: KineticCafe/actions/resolve-ref@v1.1
         with:
           ref: ${{ github.event.inputs.ref }}
           default-branch: next

@@ -47,7 +47,7 @@ jobs:
       pull-request: write
 
     steps:
-      - uses: KineticCafe/actions/dependabot-automerge@v1.0
+      - uses: KineticCafe/actions/dependabot-automerge@v1.1
         with:
           update-type: minor
 ```
@@ -59,6 +59,6 @@ jobs:
 
   Default: `${{ github.token }}`
 
-- `update-type`: The highest level of update that can be automerged. The default
-  value is `patch`, and supported values are `major`, `minor`, and `patch`. It
-  is not recommended to specify `major`.
+- `update-type`: The highest level of update that can be auto-merged. The
+  default value is `patch`, and supported values are `major`, `minor`, and
+  `patch`. It is not recommended to specify `major`.
