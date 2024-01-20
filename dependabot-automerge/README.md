@@ -3,33 +3,6 @@
 A simple composite action to simplify the enabling of auto-merge of Dependabot
 PRs.
 
-You probably don't need this action. There is a little bit of logic applied, but
-this is roughly the same as:
-
-```yaml
-jobs:
-  dependabot-automerge:
-    permissions:
-      contents: write
-      pull-request: write
-
-    runs-on: ubuntu-latest
-
-    if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
-
-    - id: metadata
-      uses: dependabot/fetch-metadata@v1
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-
-    - if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
-      run: gh pr merge --auto --merge "$PR_URL"
-      shell: bash
-      env:
-        PR_URL: ${{ github.event.pull_request.html_url }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
-
 ## Example Usage
 
 ```yaml
@@ -50,6 +23,7 @@ jobs:
       - uses: KineticCafe/actions/dependabot-automerge@v1.1
         with:
           update-type: minor
+          merge-type: rebase
 ```
 
 ## Inputs
@@ -59,6 +33,9 @@ jobs:
 
   Default: `${{ github.token }}`
 
-- `update-type`: The highest level of update that can be auto-merged. The
-  default value is `patch`, and supported values are `major`, `minor`, and
-  `patch`. It is not recommended to specify `major`.
+- `update-type`: The highest level of update that can be automatically merged.
+  The default value is `patch`; supported values are `major`, `minor`, and
+  `patch`. Automatic merge for `major` is not recommended.
+
+- `merge-type`: The type of merge to be applied. Defaults to `merge`; supported
+  values are `merge`, `rebase`, and `squash`.

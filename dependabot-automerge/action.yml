@@ -25,12 +25,17 @@ inputs:
     default: ${{ github.token }}
   update-type:
     description: |
-      The highest level of update that can be automerged. The default value is
-      `patch`, and supported values are `major`, `minor`, and `patch`. It is not
-      recommended to specify `major`.
+      The highest level of update that can be automatically merged. The default
+      value is `patch`; supported values are `major`, `minor`, and `patch`.
+      Automatic merge for `major` is not recommended.
     required: false
     default: patch
-
+  merge-type:
+    description: |
+      The type of merge to be applied. Defaults to `merge`; supported values
+      are `merge`, `rebase`, and `squash`.
+    required: false
+    default: merge
 runs:
   using: 'composite'
   steps:
@@ -52,11 +57,21 @@ runs:
         (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
         && github.actor == 'dependabot[bot]'
         && steps.metadata.outputs.update-type == env.UPDATE_TYPE
-      run: gh pr merge --auto --merge "$PR_URL"
+      run: |
+        declare merge_flag
+
+        case "${MERGE_TYPE}" in
+        merge) merge_flag=--merge ;;
+        rebase) merge_flag=--rebase ;;
+        squash) merge_flag=--squash ;;
+        esac
+
+        gh pr merge --auto "${merge_flag}" "${PR_URL}"
       shell: bash
       env:
         PR_URL: ${{ github.event.pull_request.html_url }}
         GITHUB_TOKEN: ${{ inputs.repo-token }}
+        MERGE_TYPE: ${{ inputs.merge-type || 'merge' }}
 
 branding:
   icon: check-circle

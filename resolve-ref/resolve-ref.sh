@@ -23,14 +23,28 @@ allowed() {
 }
 
 ref() {
-  gh api "repos/${GITHUB_REPOSITORY}/git/ref/$1" --jq .object.sha
+  local ref
+
+  if ! ref="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/$1" --jq .object.sha 2>&1)"; then
+    return 1
+  fi
+
+  echo "${ref}"
 }
 
 commit() {
-  gh api "repos/${GITHUB_REPOSITORY}/git/commits/$1" --jq .sha
+  local ref
+
+  if ! ref="$(gh api "repos/${GITHUB_REPOSITORY}/git/commits/$1" --jq .sha 2>&1)"; then
+    return 1
+  fi
+
+  echo "${ref}"
 }
 
 pulls() {
+  local pull
+
   if ! pull="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/$1" 2>&1)"; then
     return 1
   fi
@@ -89,19 +103,25 @@ else
     TARGET_TYPE="pr"
   fi
 
-  if [[ -z "${TARGET_SHA}" ]] && allowed branch && TARGET_SHA="$(ref "heads/${INPUT_REF}")"; then
-    TARGET_NAME="${INPUT_REF}"
-    TARGET_TYPE="branch"
+  if [[ -z "${TARGET_SHA}" ]] && allowed branch; then
+    if TARGET_SHA="$(ref "heads/${INPUT_REF}")"; then
+      TARGET_NAME="${INPUT_REF}"
+      TARGET_TYPE="branch"
+    fi
   fi
 
-  if [[ -z "${TARGET_SHA}" ]] && allowed tag && TARGET_SHA="$(ref "tags/${INPUT_REF}")"; then
-    TARGET_NAME="${INPUT_REF}"
-    TARGET_TYPE="tag"
+  if [[ -z "${TARGET_SHA}" ]] && allowed tag; then
+    if TARGET_SHA="$(ref "tags/${INPUT_REF}")"; then
+      TARGET_NAME="${INPUT_REF}"
+      TARGET_TYPE="tag"
+    fi
   fi
 
-  if [[ -z "${TARGET_SHA}" ]] && allowed commit && TARGET_SHA="$(commit "${INPUT_REF}")"; then
-    TARGET_NAME="${INPUT_REF}"
-    TARGET_TYPE="commit"
+  if [[ -z "${TARGET_SHA}" ]] && allowed commit; then
+    if TARGET_SHA="$(commit "${INPUT_REF}")"; then
+      TARGET_NAME="${INPUT_REF}"
+      TARGET_TYPE="commit"
+    fi
   fi
 
   if [[ -z "${TARGET_SHA}" ]]; then

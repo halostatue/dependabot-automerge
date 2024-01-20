@@ -1,5 +1,14 @@
 # KineticCafe/actions Changelog
 
+## 1.2 / 2024-01-22
+
+- Enhance `KineticCafe/actions/dependabot-automerge` to allow specification
+  of the type of merge to run. Found because we have repositories configured not
+  to allow merge commits.
+
+- Fix an issue with `KineticCafe/actions/resolve-ref` for non-PR resolution
+  where the output on error was being captured as the `TARGET_SHA`.
+
 ## 1.1 / 2024-01-13
 
 - Initial release of `KineticCafe/actions/resolve-ref`. This is the extraction
