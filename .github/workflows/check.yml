@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: KineticCafe/actions-dco@v1.1
+      - uses: KineticCafe/actions-dco@v1.3
         with:
           exempt-authors: |
             @kineticcommerce.com
