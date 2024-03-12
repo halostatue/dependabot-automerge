@@ -53,6 +53,9 @@ inputs:
       `pr,branch,tag,commit`.
     required: false
     default: pr,branch,tag,commit
+  debug:
+    description: Enables debug tracing if set to `1`.
+    required: false
 
 outputs:
   sha:
@@ -80,6 +83,7 @@ runs:
         INPUT_REF: ${{ inputs.ref }}
         DEFAULT_BRANCH: ${{ inputs.default-branch }}
         ALLOWED: ${{ inputs.allowed || 'pr,branch,tag,commit' }}
+        TRACE: ${{ inputs.debug || '0' }}
       run: '${{ github.action_path }}/resolve-ref.sh'
 
 branding:

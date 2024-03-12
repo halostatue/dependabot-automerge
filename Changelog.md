@@ -1,5 +1,14 @@
 # KineticCafe/actions Changelog
 
+## 1.3 / 2024-03-13
+
+- Enhanced `KineticCafe/actions/resolve-ref` to output better errors when
+  resolution fails, and add a `debug` input to turn on `set -x` for the
+  resolution phase of the script.
+
+There are no changes to `KineticCafe/actions/dependabot-automerge`. It can be
+accessed via `@v1.2` or `@v1.3`.
+
 ## 1.2 / 2024-01-22
 
 - Enhance `KineticCafe/actions/dependabot-automerge` to allow specification

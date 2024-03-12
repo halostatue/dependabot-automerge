@@ -4,6 +4,9 @@ A simple composite action to resolve an input reference to a Git SHA in the
 running repository. This would most often be used for manually triggered deploy
 actions to deploy test branches, commits, or pull requests.
 
+Ensure that `pull-request: read` and `contents: read` are present on your
+job that uses this action.
+
 ## Example Usage
 
 This example will prepare a repository for deploying automatically (on pull
@@ -55,16 +58,16 @@ jobs:
         id: auto-resolve
         run: |
           {
-            echo "ref=${GITHUB_SHA}"
+            echo "sha=${GITHUB_SHA}"
             echo "name=${GITHUB_SHA}"
             echo "type=deploy-on-merge"
           } >>"$GITHUB_OUTPUT"
 
       - uses: actions/checkout@v4
         with:
-          ref: ${{ steps.resolve.outputs.ref || steps.auto-resolve.outputs.ref }}
+          sha: ${{ steps.resolve.outputs.sha || steps.auto-resolve.outputs.sha }}
 
-      # From this point, the target ref, name, and type can be accessed using
+      # From this point, the target sha, name, and type can be accessed using
       # the form: ${{ steps.resolve.outputs.X || steps.auto-resolve.outputs.X }}
       #
       # For workflow dispatch, `inputs.ref` will be resolved. If not provided,
@@ -96,9 +99,11 @@ jobs:
   a string containing a comma separated list of ref types. The default is
   `pr,branch,tag,commit`.
 
+- `debug`: If set to `1`, script tracing will be enabled.
+
 ## Outputs
 
-- `sha`: The resolved SHA
+- `sha`: The resolved SHA.
 - `name`: The name used to resolve the SHA.
 - `type`: The type of ref used to resolve the SHA. Will be one of
   `repo-default-branch` (no `ref` or `default-branch` values present),
