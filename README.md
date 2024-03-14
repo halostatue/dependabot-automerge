@@ -10,6 +10,9 @@ across all workflow versions.
 - [dependabot-automerge](tree/main/dependabot-automerge): A simple composite
   action to simplify the enabling of auto-merge of Dependabot PRs.
 
+- [extract-changelog](tree/main/extract-changelog): A simple composite action to
+  extract a version section from a changelog file.
+
 - [resolve-ref](tree/main/resolve-ref): A simple composite action to resolve an
   input reference to a Git SHA in the running repository.
 

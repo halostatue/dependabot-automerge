@@ -1,5 +1,12 @@
 # KineticCafe/actions Changelog
 
+## 1.4 / 2024-03-15
+
+- Added `KineticCafe/actions/extract-changelog` for a simple changelog
+  description extraction from a markdown file.
+
+There are no changes to other composite actions.
+
 ## 1.3 / 2024-03-13
 
 - Enhanced `KineticCafe/actions/resolve-ref` to output better errors when
