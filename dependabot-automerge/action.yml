@@ -14,28 +14,29 @@
 
 name: Enable Automerge for Dependabot
 description: |
-  Enables Automerge for Dependabot PRs
-author: 'KineticCafe'
+  Enables GitHub Automerge for Dependabot PRs
+author: KineticCafe
+
 inputs:
   repo-token:
     description: |
-      The GitHub token for this action. Requires `pull-requests: write`
-      permission.
+      The GitHub token for this action. Requires `pull-requests: write` permission.
     required: true
     default: ${{ github.token }}
   update-type:
     description: |
-      The highest level of update that can be automatically merged. The default
-      value is `patch`; supported values are `major`, `minor`, and `patch`.
-      Automatic merge for `major` is not recommended.
+      The highest level of update that can be automatically merged. The default value is
+      `patch`; supported values are `major`, `minor`, and `patch`. Automatic merge for
+      `major` is not recommended.
     required: false
     default: patch
   merge-type:
     description: |
-      The type of merge to be applied. Defaults to `merge`; supported values
-      are `merge`, `rebase`, and `squash`.
+      The type of merge to be applied. Defaults to `merge`; supported values are `merge`,
+      `rebase`, and `squash`.
     required: false
     default: merge
+
 runs:
   using: 'composite'
   steps:
@@ -49,7 +50,7 @@ runs:
         (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
         && github.actor == 'dependabot[bot]'
       id: metadata
-      uses: dependabot/fetch-metadata@v1
+      uses: dependabot/fetch-metadata@v2
       with:
         github-token: ${{ inputs.repo-token }}
 
