@@ -1,5 +1,9 @@
 # KineticCafe/actions Changelog
 
+## 2.0.1 / 2025-03-25
+
+- Composite actions have been pinned.
+
 ## 2.0 / 2024-10-01
 
 - Upgrade `KineticCafe/actions/dependabot-automerge` dependencies. This includes
