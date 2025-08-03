@@ -3,12 +3,6 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-  - package-ecosystem: github-actions
-    directory: /dependabot-automerge
-    schedule:
-      interval: weekly
-  - package-ecosystem: github-actions
-    directory: /resolve-ref
-    schedule:
-      interval: weekly
+      interval: monthly
+    commit-message:
+      prefix: chore
