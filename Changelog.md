@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 / 2025-10-02
+
+Updated dependencies.
+
 ## 1.0.0 / 2025-08-02
 
 Forked from [KineticCafe/actions/dependabot-automerge][kcadm] and enhanced to
