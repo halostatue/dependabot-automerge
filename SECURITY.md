@@ -12,15 +12,6 @@ supported with security updates.
 
 ## Reporting a Vulnerability
 
-Prefer creating a [private vulnerability report][advisory] with GitHub.
-Alternatively, send an email to [security@actions.halostatue.ca][email] with the
-text `dependabot-automerge` in the subject. Emails sent to this address should
-be encrypted using [age][age] with the following public key:
+Create a [private vulnerability report][advisory] with GitHub.
 
-```
-age1fc6ngxmn02m62fej5cl30lrvwmxn4k3q2atqu53aatekmnqfwumqj4g93w
-```
-
-[email]: mailto:security@actions.halostatue.ca
-[age]: https://github.com/FiloSottile/age
 [advisory]: https://github.com/halostatue/dependabot-automerge/security/advisories/new
