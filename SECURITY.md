@@ -1,4 +1,4 @@
-# Security Policy
+# halostatue/dependabot-automerge Security Policy
 
 ## LLM-Generated Security Report Policy
 
@@ -7,8 +7,8 @@ agents.
 
 ## Supported Versions
 
-This action is supported on a rolling basis, with only the most recent version
-supported with security updates.
+This action is supported on a rolling basis. Only the most recent version will
+receive security updates.
 
 ## Reporting a Vulnerability
 
