@@ -1,5 +1,7 @@
 # halostatue/dependabot-automerge
 
+[![Apache 2.0](https://img.shields.io/badge/licence-Apache-2.0-blue?style=for-the-badge "Apache 2.0")](https://github.com/halostatue/dependabot-automerge/blob/main/LICENCE.md)
+
 A simple composite action to simplify the enabling of auto-merge of Dependabot
 PRs.
 
@@ -41,8 +43,3 @@ jobs:
   `merge`, `rebase`, and `squash`. If `auto` is specified, this action will
   check the current repo whether merge commits, squash commits, and/or rebase
   commits are permitted (in that order). The first one enabled will be selected.
-
-[KineticCafe]: https://github.com/KineticCafe
-[KineticCommerce]: https://github.com/KineticCommerce
-[dco]: https://developercertificate.org
-[code of conduct]: https://github.com/KineticCafe/code-of-conduct
